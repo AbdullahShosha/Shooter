@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameControl : MonoBehaviour
 {
     public GameObject PausePanel ,muzzleflash;
-    public Rigidbody BulletPrefab;
+    public Transform BulletPrefab;
     public Camera maincam;
 
    // Rigidbody Bullet;
@@ -44,7 +44,7 @@ public class GameControl : MonoBehaviour
     
     public void Shoot()
     {
-        RaycastHit hit;
+        /*RaycastHit hit;
         if (Physics.Raycast(maincam.transform.position,maincam.transform.forward,out hit))
         {
             if (hit.transform.CompareTag("Enemy"))
@@ -52,11 +52,11 @@ public class GameControl : MonoBehaviour
                 hit.transform.GetComponent<Animator>().SetBool("Dead", true);
                 hit.transform.GetComponent<BoxCollider>().enabled = false;
             }
-        }
+        }*/
         //Spawner.transform.LookAt(hit.transform.transform);
-        Rigidbody Bullet = Instantiate(BulletPrefab, Spawner.position, Spawner.rotation);
+        Instantiate(BulletPrefab, Spawner.position, Spawner.rotation);
         Instantiate(muzzleflash, Spawner.position, Spawner.rotation);
-        Bullet.AddForce(Spawner.forward * 1000f);
+
     }
 
 
