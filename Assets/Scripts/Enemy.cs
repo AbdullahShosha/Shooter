@@ -44,8 +44,10 @@ public class Enemy : MonoBehaviour,IDamagable
     }
     public void Die()
     {
-        gameObject.transform.GetComponent<Animator>().SetBool("Dead", true);
-        gameObject.transform.GetComponent<BoxCollider>().enabled = false;
+        gameObject.GetComponent<Animator>().SetBool("Dead", true);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        gameObject.GetComponent<NavMeshAgent>().isStopped = true;
+        gameObject.GetComponent<Enemy>().enabled = false;
         gameObject.GetComponent<DestroyafterSeconds>().enabled = true;
     }
 
