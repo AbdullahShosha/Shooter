@@ -1,13 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour,IDamagable
 {
     Health Zombie;
     Transform Target;
+    NavMeshAgent navMeshAgent;
+
     //public float TimeBeforeDestroy = 5;
     //float counter = 0;
+
+    private void Awake()
+    {
+        navMeshAgent = GetComponent<NavMeshAgent>();
+    }
     private void Start()
     {
         Target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -17,16 +25,8 @@ public class Enemy : MonoBehaviour,IDamagable
     }
     void Update()
     {
-        if(gameObject.GetComponent<BoxCollider>().enabled)
-            gameObject.transform.LookAt(Target);
-        /*else
-        {
-            if(!gameObject.GetComponent<DestroyafterSeconds>().enabled)
-            gameObject.GetComponent<DestroyafterSeconds>().enabled = true;
-            counter += Time.deltaTime;
-            if (counter >= TimeBeforeDestroy)
-                Destroy(this.gameObject);
-        }*/
+        navMeshAgent.destination = Target.position;
+        
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -48,4 +48,6 @@ public class Enemy : MonoBehaviour,IDamagable
         gameObject.transform.GetComponent<BoxCollider>().enabled = false;
         gameObject.GetComponent<DestroyafterSeconds>().enabled = true;
     }
+
+    
 }

@@ -26,12 +26,12 @@ public class Player : MonoBehaviour ,IDamagable
         Destroy(hit.gameObject);
     }*/
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    private void OnCollisionEnter(Collision collider)
     {
-        if (hit.gameObject.CompareTag("Enemy"))
+        if (collider.gameObject.CompareTag("Enemy"))
         {
             Takedamage(20);
-            Destroy(hit.gameObject);
+            Destroy(collider.gameObject);
         }
     }
     public void Takedamage(int amount)
@@ -46,4 +46,5 @@ public class Player : MonoBehaviour ,IDamagable
         GameOverPanel.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
     }
+    
 }
